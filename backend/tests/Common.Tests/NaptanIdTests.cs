@@ -37,4 +37,14 @@ public class NaptanIdTests
         var set = new HashSet<NaptanId> { NaptanId.FromString(id), NaptanId.FromString(id) };
         set.Count.ShouldBe(1);
     }
+
+    [Fact]
+    public void DefaultValueDoesNotThrow()
+    {
+        var naptanId = default(NaptanId);
+
+        Should.NotThrow(() => naptanId.ToString());
+        Should.NotThrow(() => naptanId.Equals(default(NaptanId)));
+        Should.NotThrow(() => naptanId.GetHashCode());
+    }
 }
