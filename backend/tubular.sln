@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TflQuery", "TflQuery\TflQuery.csproj", "{47891747-95A0-4713-BFBB-4F9024FEDEBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TflMapBuilder", "TflMapBuilder\TflMapBuilder.csproj", "{61B90F3E-BBC0-44EC-8BCB-FE8D56306623}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{DDDB7DA3-9596-4DDC-868C-96784CF3A1D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E033A5B8-20A1-4FB7-B415-9192143F4C1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Tests", "tests\Common.Tests\Common.Tests.csproj", "{EECCE4F2-E083-448D-B0A9-CA650D4169E1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{47891747-95A0-4713-BFBB-4F9024FEDEBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47891747-95A0-4713-BFBB-4F9024FEDEBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47891747-95A0-4713-BFBB-4F9024FEDEBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47891747-95A0-4713-BFBB-4F9024FEDEBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61B90F3E-BBC0-44EC-8BCB-FE8D56306623}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61B90F3E-BBC0-44EC-8BCB-FE8D56306623}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61B90F3E-BBC0-44EC-8BCB-FE8D56306623}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61B90F3E-BBC0-44EC-8BCB-FE8D56306623}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDDB7DA3-9596-4DDC-868C-96784CF3A1D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDDB7DA3-9596-4DDC-868C-96784CF3A1D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDDB7DA3-9596-4DDC-868C-96784CF3A1D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDDB7DA3-9596-4DDC-868C-96784CF3A1D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EECCE4F2-E083-448D-B0A9-CA650D4169E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EECCE4F2-E083-448D-B0A9-CA650D4169E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EECCE4F2-E083-448D-B0A9-CA650D4169E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EECCE4F2-E083-448D-B0A9-CA650D4169E1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EECCE4F2-E083-448D-B0A9-CA650D4169E1} = {E033A5B8-20A1-4FB7-B415-9192143F4C1B}
+	EndGlobalSection
+EndGlobal
