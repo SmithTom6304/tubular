@@ -20,4 +20,21 @@ public class NaptanIdTests
         var naptanId2 = NaptanId.FromString(id);
         naptanId1.ShouldBe(naptanId2);
     }
+
+    [Theory]
+    [InlineData("940GZZLUHBT")]
+    public void HasValueHashCode(string id)
+    {
+        var naptanId1 = NaptanId.FromString(id);
+        var naptanId2 = NaptanId.FromString(id);
+        naptanId1.GetHashCode().ShouldBe(naptanId2.GetHashCode());
+    }
+
+    [Theory]
+    [InlineData("940GZZLUHBT")]
+    public void IsDeduplicatedByHashSet(string id)
+    {
+        var set = new HashSet<NaptanId> { NaptanId.FromString(id), NaptanId.FromString(id) };
+        set.Count.ShouldBe(1);
+    }
 }

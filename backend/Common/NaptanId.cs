@@ -57,7 +57,9 @@ public readonly struct NaptanId : IEquatable<NaptanId>
 
     public override int GetHashCode()
     {
-        return _data.GetHashCode();
+        var hash = new HashCode();
+        hash.AddBytes(_data);
+        return hash.ToHashCode();
     }
 
     public static bool operator ==(NaptanId left, NaptanId right)
