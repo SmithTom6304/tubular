@@ -48,8 +48,9 @@ No strong objection to it beyond that.
 - Grain topology becomes a live design question — per-train, per-station,
   per-line, or a mix. Deliberately unresolved; tracked as an open issue.
 - Grain identity should map onto domain identity, which puts pressure on
-  `NaptanId` to behave correctly as a key (it currently does not — its
-  `GetHashCode` returns a reference hash).
+  `NaptanId` to behave correctly as a key. It didn't at the time this ADR was
+  written — `GetHashCode` returned a reference hash — fixed in #1, with the
+  representation decision recorded in ADR-0004.
 - Orleans clustering is another moving part in local development, which
   strengthens the case for .NET Aspire over hand-rolled docker-compose.
 - Grain state is in-memory by default. Persistence and what survives a restart

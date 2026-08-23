@@ -48,6 +48,8 @@ homes for overlapping content, and guarantees the notes and the repo drift apart
   links for anything meant to be read there.
 - Documents written as personal notes are now public-facing, which warrants a
   little more care in how they're written.
-- The domain glossary at `CONTEXT.md` is the notable gap. The domain has real
-  ambiguity — *StopPoint* vs *Station*, *Vehicle* vs *Train* — and the glossary
-  should be written when those terms are deliberately resolved, not guessed at.
+- `CONTEXT.md` was the notable gap at the time; it now exists, seeded with
+  `NaptanId`/ATCO Code (resolved alongside #1/#7, see ADR-0004). The domain
+  still has real ambiguity — *StopPoint* vs *Station*, *Vehicle* vs *Train* —
+  unresolved terms should be added when they're deliberately settled, not
+  guessed at.
