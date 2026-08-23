@@ -33,8 +33,11 @@ The current focus.
    trains.
 
 The poller and the simulator write the **same event contract** — the engine
-cannot distinguish them. This is the system's central seam, and pinning it down
-is a prerequisite for building any of the three services independently.
+cannot distinguish them. This is the system's central seam. The event is an
+**Arrival Prediction**, not an arrival: TfL forecasts, it doesn't report
+occurrences, and the contract is shaped accordingly — StopPoint-grain, with an
+absolute timestamp rather than a countdown that goes stale on replay. See
+[ADR-0005](adr/0005-arrival-prediction-contract.md) and `CONTEXT.md`.
 
 Network topology is a build-time artifact rather than runtime discovery
 ([ADR-0002](adr/0002-topology-as-build-time-artifact.md)).
@@ -98,6 +101,12 @@ Previously open, now decided — kept so the reasoning isn't relitigated:
 - **Transport to frontend: SignalR, not raw websockets.**
 - **Frontend: React + TypeScript**, with a pure D3 core — see
   [frontend-design-doc.md](frontend-design-doc.md).
+- **Arrival contract: Arrival Prediction events, StopPoint-grain, absolute
+  timestamp.** Station-grain and a relative countdown were both considered
+  and rejected — see [ADR-0005](adr/0005-arrival-prediction-contract.md).
+  The StopPoint→Station rollup this defers is needed on both the engine side
+  (crowding aggregation) and the frontend side (station-level grouping);
+  raise both together when it's designed.
 
 ## Research questions
 

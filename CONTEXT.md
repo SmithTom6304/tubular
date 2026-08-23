@@ -21,3 +21,25 @@ schema (`A-Za-z0-9`), though every id seen from TfL so far is uppercase-only.
 Defined by the NaPTAN/ATCO standard, not by this project.
 _Avoid_: naptan code (that's the identifier `NaptanId` holds; ATCO Code is the
 format it's encoded in)
+
+**StopPoint**:
+A single physical location a train can call at — one platform, entrance, or
+stand — identified by its `NaptanId`. Distinct from a **Station**, which
+groups several StopPoints (e.g. the platforms and entrances sharing one
+interchange) under a separate parent identifier. The relationship between the
+two is not yet modelled — deferred until crowding aggregation needs it.
+_Avoid_: station, stop (ambiguous — could mean StopPoint or Station)
+
+**Train**:
+A single physical vehicle in service, tracked across its journey. TfL's API
+identifies it as `VehicleId`.
+_Avoid_: vehicle (that's the TfL API field name, not the domain term)
+
+**Arrival Prediction**:
+TfL's forecast of when a specific Train will reach a specific StopPoint,
+carried as an absolute timestamp. Superseded repeatedly as the train
+approaches — not a record that an arrival happened. This is the event on the
+Kafka arrival-predictions topic, the shared contract between the poller and
+the simulator (see [ADR-0005](docs/adr/0005-arrival-prediction-contract.md)).
+_Avoid_: arrival, arrival event (both read as "the train has arrived", not
+"TfL predicts it will")
