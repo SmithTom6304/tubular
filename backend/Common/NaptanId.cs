@@ -1,8 +1,10 @@
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Common;
 
+[JsonConverter(typeof(NaptanIdJsonSerializer))]
 public readonly struct NaptanId : IEquatable<NaptanId>
 {
     [InlineArray(12)]
