@@ -5,9 +5,10 @@ using TfL;
 using TflMapBuilder;
 using TflQuery;
 using System.Text.Json;
+using Common.Domain.Serialization;
 
 var tflCLient = new TfLClient();
-Line[] lines = [Line.Jubilee];
+string[] lines = ["line"];
 var tflQueries = new TflQueries(tflCLient, lines);
 
 var stopPoints = (await tflQueries.QueryStopPoints(lines[0], CancellationToken.None))

@@ -5,5 +5,5 @@ namespace TflQuery;
 public class Config
 {
     public TimeSpan PollInterval { get; set; } = TimeSpan.FromSeconds(5);
-    public Line[] Lines { get; set; } = [Line.Jubilee];
+    public string[] Lines { get; set; } = ["jubilee"];
 }

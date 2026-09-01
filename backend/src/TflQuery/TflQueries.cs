@@ -1,17 +1,18 @@
 using Common;
+using Common.Domain;
 using TfL;
 using TfL.Entities;
 
 namespace TflQuery;
 
-public class TflQueries(TfLClient tflClient, Line[] lines)
+public class TflQueries(TfLClient tflClient, string[] lines)
 {
     public Task<TfLArrival[]> QueryLineArrivals(CancellationToken ct) =>
-        tflClient.Line.GetLineArrivalsAsync(LinesToString(lines), ct);
+        tflClient.Line.GetLineArrivalsAsync(lines, ct);
 
-    public async Task<NaptanId[]> QueryRouteSequence(Line line, bool outbound, CancellationToken ct)
+    public async Task<NaptanId[]> QueryRouteSequence(string line, bool outbound, CancellationToken ct)
     {
-        var routesAndStops = await tflClient.Line.GetRoutesAndStopsAsync(line.ToString(),
+        var routesAndStops = await tflClient.Line.GetRoutesAndStopsAsync(line,
             outbound ? TfLDirectionEnum.Outbound : TfLDirectionEnum.Inbound,
             serviceType: null,
             excludeCrowding: true,
@@ -19,9 +20,7 @@ public class TflQueries(TfLClient tflClient, Line[] lines)
         return routesAndStops.OrderedLineRoutes.First().NaptanIds.Select(NaptanId.FromString).ToArray();
     }
 
-    public async Task<TfLStopPoint[]> QueryStopPoints(Line line, CancellationToken ct) =>
-        await tflClient.Line.GetLineStationsAsync(line.ToString(), false, ct);
-
-    private static IEnumerable<string> LinesToString(Line[] lines) => lines.Select(l => l.ToString());
+    public async Task<TfLStopPoint[]> QueryStopPoints(string line, CancellationToken ct) =>
+        await tflClient.Line.GetLineStationsAsync(line, false, ct);
 }
 

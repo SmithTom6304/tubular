@@ -1,8 +1,9 @@
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json.Serialization;
+using Common.Domain.Serialization;
 
-namespace Common;
+namespace Common.Domain;
 
 [JsonConverter(typeof(NaptanIdJsonSerializer))]
 public readonly struct NaptanId : IEquatable<NaptanId>

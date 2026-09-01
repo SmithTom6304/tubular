@@ -8,9 +8,9 @@ public class MapLink
 {
     public MapStopPoint From { get; }
     public MapStopPoint To { get; }
-    public Line Line { get; }
+    public string Line { get; }
 
-    public MapLink(MapStopPoint from, MapStopPoint to, Line line)
+    public MapLink(MapStopPoint from, MapStopPoint to, string line)
     {
         From = from;
         To = to;
@@ -32,6 +32,6 @@ public class MapLink
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(From, To, (int)Line);
+        return HashCode.Combine(From, To, Line);
     }
 }

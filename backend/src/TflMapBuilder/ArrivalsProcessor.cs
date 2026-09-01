@@ -23,23 +23,18 @@ public class ArrivalsProcessor
             {
                 var from = sortedArrivals[i - 1].ToMapStopPoint();
                 var to = sortedArrivals[i].ToMapStopPoint();
-                // TODO Dont need to parse line each time
-                if (!sortedArrivals[i - 1].LineId.TryParse(out var line))
-                {
-                    // TODO Handle error
-                    continue;
-                }
+                var line = sortedArrivals[i - 1].LineId;
 
                 // Add stations if not present
                 map.StopPoints.Add(from);
                 map.StopPoints.Add(to);
 
-                var link = new MapLink(from, to, line.Value);
+                var link = new MapLink(from, to, line);
                 map.Links.Add(link);
 
                 // Due to nature of API messages, we cannot get data going from one endpoint to second stop on line
                 // This is the hack to represent those
-                var backwardLink = new MapLink(to, from, line.Value);
+                var backwardLink = new MapLink(to, from, line);
                 map.Links.Add(backwardLink);
             }
         }

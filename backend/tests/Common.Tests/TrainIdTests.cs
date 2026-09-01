@@ -1,3 +1,4 @@
+using Common.Domain;
 using Shouldly;
 
 namespace Common.Tests;

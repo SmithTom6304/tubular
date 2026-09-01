@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
+using Common.Domain.Serialization;
 
-namespace Common;
+namespace Common.Domain;
 
 [JsonConverter(typeof(TrainIdJsonSerializer))]
 public readonly record struct TrainId

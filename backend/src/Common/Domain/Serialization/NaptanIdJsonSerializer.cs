@@ -1,7 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Common;
+namespace Common.Domain.Serialization;
 
 public class NaptanIdJsonSerializer : JsonConverter<NaptanId>
 {
