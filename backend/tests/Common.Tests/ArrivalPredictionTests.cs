@@ -11,6 +11,7 @@ public class ArrivalPredictionTests
     {
         var prediction = new ArrivalPrediction(
             TrainId.FromString("218"),
+            "jubilee",
             NaptanId.FromString("940GZZLUHBT"),
             new DateTimeOffset(2026, 8, 26, 12, 30, 0, TimeSpan.Zero));
 
