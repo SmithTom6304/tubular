@@ -67,3 +67,19 @@ easy to get wrong. "Seconds until" is derived at consumption time from
 - `Arrival Prediction` is the event name going forward, in code and
   elsewhere — not `Arrival` or `ArrivalEvent`, which both read as an
   occurrence rather than a forecast. See `CONTEXT.md`.
+
+## Update (2026-09-12): Line joined the grain
+
+`ArrivalPrediction` now also carries `Line`, keying the event by Train,
+Line and StopPoint rather than just Train and StopPoint. Needed because a
+single StopPoint can sit on more than one line, and the simulator
+(`ArrivalsSimulator`) generates predictions per line — without it, events
+from different lines calling at the same platform would be indistinguishable.
+
+`Line` is a plain `string` (e.g. `"jubilee"`), not a value type. The
+previous `Line` enum (closed to the single `Jubilee` member) was deleted in
+the same change rather than extended. That trades away the compile-time
+safety a closed enum gave for a genuinely closed, small set (the Underground
+lines) — worth revisiting once a second line is added to the simulator and
+it's clear whether "closed enum" or "open string validated against known
+lines" is the better fit. See `CONTEXT.md` for the `Line` term.

@@ -36,10 +36,20 @@ identifies it as `VehicleId`.
 _Avoid_: vehicle (that's the TfL API field name, not the domain term)
 
 **Arrival Prediction**:
-TfL's forecast of when a specific Train will reach a specific StopPoint,
-carried as an absolute timestamp. Superseded repeatedly as the train
-approaches — not a record that an arrival happened. This is the event on the
-Kafka arrival-predictions topic, the shared contract between the poller and
-the simulator (see [ADR-0005](docs/adr/0005-arrival-prediction-contract.md)).
+TfL's forecast of when a specific Train will reach a specific StopPoint on a
+specific Line, carried as an absolute timestamp. Superseded repeatedly as the
+train approaches — not a record that an arrival happened. This is the event
+on the Kafka arrival-predictions topic, the shared contract between the
+poller and the simulator (see
+[ADR-0005](docs/adr/0005-arrival-prediction-contract.md)).
 _Avoid_: arrival, arrival event (both read as "the train has arrived", not
 "TfL predicts it will")
+
+**Line**:
+A London Underground service line (e.g. Jubilee) that a StopPoint sits on and
+a Train runs along. Currently a plain string (TfL's own lowercase id form,
+e.g. `"jubilee"`), not a value type — the set of lines is genuinely closed,
+but nothing enforces that yet. See
+[ADR-0005](docs/adr/0005-arrival-prediction-contract.md#update-2026-09-12-line-joined-the-grain).
+_Avoid_: route (TfL's API uses "route" for something more specific — a
+sequence of StopPoints — not a line as a whole)
