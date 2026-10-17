@@ -14,8 +14,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ArrivalsSimulator\ArrivalsSimulator.csproj" />
+      <ProjectReference Include="..\TflQuery\TflQuery.csproj" />
       <ProjectReference Include="..\NetworkState\NetworkState\NetworkState.csproj" />
+      <ProjectReference Include="..\NetworkState\NetworkState.DebugViewer\NetworkState.DebugViewer.csproj" />
     </ItemGroup>
 
 </Project>
