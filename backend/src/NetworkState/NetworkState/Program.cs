@@ -28,9 +28,9 @@ builder.UseOrleans(silo =>
 builder.Services.AddSingleton<ITrainTracker, TrainTracker>();
 builder.Services.AddSingleton<ISegmentTimingTracker, SegmentTimingTracker>();
 
-builder.AddKafkaConsumer<Null, ArrivalPrediction>(
+builder.AddKafkaConsumer<Null, IReadOnlyList<ArrivalPrediction>>(
     connectionName: "kafka",
-    configureBuilder: (_, consumerBuilder) => consumerBuilder.SetValueDeserializer(new JsonDeserializer<ArrivalPrediction>()));
+    configureBuilder: (_, consumerBuilder) => consumerBuilder.SetValueDeserializer(new JsonDeserializer<IReadOnlyList<ArrivalPrediction>>()));
 
 builder.Services.AddHostedService<ArrivalPredictionConsumer>();
 

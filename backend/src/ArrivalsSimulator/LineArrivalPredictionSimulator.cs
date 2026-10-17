@@ -15,7 +15,8 @@ internal class LineArrivalPredictionSimulator(
     private class TrainState
     {
         public required TrainId TrainId { get; init; }
-        public int StopPointIndex { get; set; }
+        public required int StopPointIndex { get; set; }
+        public required TimeSpan TimeRemaining { get; set; }
     }
 
     private TimeSpan SimulationInterval { get; } = TimeSpan.FromSeconds(5);
@@ -31,7 +32,7 @@ internal class LineArrivalPredictionSimulator(
         while (!stoppingToken.IsCancellationRequested)
         {
             // Trains will reach end of station one at a time
-            if (LineState.Count > 0 && LineState.Peek().StopPointIndex == StopPointsForLine.Count)
+            if (LineState.Count > 0 && LineState.Peek().StopPointIndex >= StopPointsForLine.Count)
             {
                 logger.LogDebug("Train {Train} has reached the end of line {Line}", LineState.Dequeue().TrainId, line);
             }
@@ -39,10 +40,17 @@ internal class LineArrivalPredictionSimulator(
             // Add trains one loop at a time
             if (LineState.Count < MaxTrainsOnLine)
             {
-                var trainState = new TrainState() { TrainId = trainIdGenerator.GenerateTrainId() };
+                var trainState = new TrainState()
+                {
+                    TrainId = trainIdGenerator.GenerateTrainId(),
+                    StopPointIndex = 0,
+                    TimeRemaining = TimeSpan.FromSeconds(Random.Shared.Next(10, 20))
+                };
                 logger.LogDebug("Train {Train} has started running on line {Line}", trainState.TrainId, line);
                 LineState.Enqueue(trainState);
             }
+
+            var predictions = new List<ArrivalPrediction>();
 
             foreach (var train in LineState)
             {
@@ -54,16 +62,29 @@ internal class LineArrivalPredictionSimulator(
                     continue;
                 }
 
-                var prediction = new ArrivalPrediction(
+                var timeRemoved = TimeSpan.FromSeconds(Random.Shared.Next(-3, 10));
+                train.TimeRemaining -= timeRemoved;
+                if (train.TimeRemaining <= TimeSpan.Zero)
+                {
+                    train.StopPointIndex++;
+                    train.TimeRemaining = TimeSpan.FromSeconds(Random.Shared.Next(10, 20));
+
+                    // Past the final stop: no prediction to make; the train is dequeued next loop.
+                    if (train.StopPointIndex >= StopPointsForLine.Count)
+                    {
+                        continue;
+                    }
+                }
+
+                predictions.Add(new ArrivalPrediction(
                     train.TrainId,
                     line,
                     StopPointsForLine[train.StopPointIndex].NaptanId,
-                    DateTimeOffset.UtcNow + TimeSpan.FromSeconds(30));
-
-                await producer.SendPredictionAsync(prediction, stoppingToken);
-
-                train.StopPointIndex++;
+                    DateTimeOffset.UtcNow + train.TimeRemaining));
             }
+
+            if (predictions.Count > 0)
+                await producer.SendPredictionsAsync(predictions, stoppingToken);
 
             await Task.Delay(SimulationInterval, stoppingToken);
         }

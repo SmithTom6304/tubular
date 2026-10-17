@@ -11,10 +11,10 @@ var builder = Host.CreateApplicationBuilder(args);
 
 builder.AddServiceDefaults();
 
-builder.Services.AddSingleton<ISerializer<ArrivalPrediction>, JsonSerializer<ArrivalPrediction>>();
-builder.AddKafkaProducer<Null, ArrivalPrediction>(
+builder.Services.AddSingleton<ISerializer<IReadOnlyList<ArrivalPrediction>>, JsonSerializer<IReadOnlyList<ArrivalPrediction>>>();
+builder.AddKafkaProducer<Null, IReadOnlyList<ArrivalPrediction>>(
     connectionName: "kafka",
-    configureBuilder: (_, producerBuilder) => producerBuilder.SetValueSerializer(new JsonSerializer<ArrivalPrediction>()));
+    configureBuilder: (_, producerBuilder) => producerBuilder.SetValueSerializer(new JsonSerializer<IReadOnlyList<ArrivalPrediction>>()));
 
 builder.Services.AddSingleton<LineStopPointHelper>();
 builder.Services.AddSingleton<TrainIdGenerator>();

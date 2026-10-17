@@ -14,14 +14,19 @@ public sealed class TrainGrain(
     private const string StalenessReminderName = "staleness";
     private static readonly TimeSpan StalenessWindow = TimeSpan.FromSeconds(90);
 
-    public async Task ApplyArrivalPrediction(ArrivalPrediction arrivalPrediction)
+    public async Task ApplyArrivalPredictions(IReadOnlyList<ArrivalPrediction> predictions)
     {
+        if (predictions.Count == 0)
+            return;
+
+        var next = predictions.MinBy(p => p.ExpectedArrival)!;
+
         var now = DateTimeOffset.UtcNow;
         var current = state.State.Line is null
-            ? new TrainState { Id = arrivalPrediction.Train, Line = arrivalPrediction.Line, LastUpdated = now }
+            ? new TrainState { Id = next.Train, Line = next.Line, LastUpdated = now }
             : state.State;
 
-        var (updated, traversal) = tracker.Apply(current, arrivalPrediction.StopPoint, arrivalPrediction.ExpectedArrival, now);
+        var (updated, traversal) = tracker.Apply(current, next.StopPoint, next.ExpectedArrival, now);
         state.State = updated;
         await state.WriteStateAsync();
 
