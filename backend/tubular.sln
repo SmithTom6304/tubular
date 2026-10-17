@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkState.Domain", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkState.Application.Tests", "tests\NetworkState.Application.Tests\NetworkState.Application.Tests.csproj", "{044B6746-3CD8-44E8-B9B4-9AE6939A715F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkState.DebugViewer", "src\NetworkState\NetworkState.DebugViewer\NetworkState.DebugViewer.csproj", "{AD0DB5C1-D362-4590-A17F-1F8538EC0650}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -184,6 +186,18 @@ Global
 		{044B6746-3CD8-44E8-B9B4-9AE6939A715F}.Release|x64.Build.0 = Release|Any CPU
 		{044B6746-3CD8-44E8-B9B4-9AE6939A715F}.Release|x86.ActiveCfg = Release|Any CPU
 		{044B6746-3CD8-44E8-B9B4-9AE6939A715F}.Release|x86.Build.0 = Release|Any CPU
+		{AD0DB5C1-D362-4590-A17F-1F8538EC0650}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD0DB5C1-D362-4590-A17F-1F8538EC0650}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD0DB5C1-D362-4590-A17F-1F8538EC0650}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AD0DB5C1-D362-4590-A17F-1F8538EC0650}.Debug|x64.Build.0 = Debug|Any CPU
+		{AD0DB5C1-D362-4590-A17F-1F8538EC0650}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AD0DB5C1-D362-4590-A17F-1F8538EC0650}.Debug|x86.Build.0 = Debug|Any CPU
+		{AD0DB5C1-D362-4590-A17F-1F8538EC0650}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD0DB5C1-D362-4590-A17F-1F8538EC0650}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD0DB5C1-D362-4590-A17F-1F8538EC0650}.Release|x64.ActiveCfg = Release|Any CPU
+		{AD0DB5C1-D362-4590-A17F-1F8538EC0650}.Release|x64.Build.0 = Release|Any CPU
+		{AD0DB5C1-D362-4590-A17F-1F8538EC0650}.Release|x86.ActiveCfg = Release|Any CPU
+		{AD0DB5C1-D362-4590-A17F-1F8538EC0650}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -202,5 +216,6 @@ Global
 		{9A1C7E2D-4B3F-4E5A-8C6D-1F2A3B4C5D6E} = {E7E3DBA1-79B6-4B82-B38E-0F2660BFD4BA}
 		{1E2056A5-E9F8-49D0-B5FE-70414D82675E} = {9A1C7E2D-4B3F-4E5A-8C6D-1F2A3B4C5D6E}
 		{044B6746-3CD8-44E8-B9B4-9AE6939A715F} = {E033A5B8-20A1-4FB7-B415-9192143F4C1B}
+		{AD0DB5C1-D362-4590-A17F-1F8538EC0650} = {9A1C7E2D-4B3F-4E5A-8C6D-1F2A3B4C5D6E}
 	EndGlobalSection
 EndGlobal

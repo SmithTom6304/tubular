@@ -16,6 +16,10 @@ builder.UseOrleans(silo =>
     silo.UseLocalhostClustering();
     silo.UseInMemoryReminderService();
     silo.AddMemoryGrainStorageAsDefault();
+
+    // Explicit stream subscriptions (our client-side consumers, e.g. NetworkState.DebugViewer)
+    // need a PubSubStore grain-storage provider to track them.
+    silo.AddMemoryGrainStorage("PubSubStore");
     silo.AddMemoryStreams(TrainStreamConstants.ProviderName);
 
     // NetworkState.Domain and NetworkState.Application stay Orleans-free (see ADR-0006), so their

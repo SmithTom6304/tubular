@@ -74,5 +74,5 @@ public sealed class TrainGrain(
 
     private IAsyncStream<TrainStreamEvent> GetTrainStream() =>
         this.GetStreamProvider(TrainStreamConstants.ProviderName)
-            .GetStream<TrainStreamEvent>(TrainStreamConstants.Namespace, this.GetPrimaryKeyString());
+            .GetStream<TrainStreamEvent>(TrainStreamConstants.Namespace, TrainStreamConstants.AllTrainsKey);
 }

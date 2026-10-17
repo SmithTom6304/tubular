@@ -1,16 +1,18 @@
+using Microsoft.Extensions.Logging;
 using NetworkState.Application;
 using NetworkState.Domain;
 using NetworkState.Grains.Interfaces;
-using Orleans.Runtime;
 
 namespace NetworkState.Grains;
 
 public sealed class SegmentTimingGrain(
     [PersistentState("segmentTiming", "Default")] IPersistentState<SegmentTimingState> state,
-    ISegmentTimingTracker tracker) : Grain, ISegmentTimingGrain
+    ISegmentTimingTracker tracker,
+    ILogger<SegmentTimingGrain> logger) : Grain, ISegmentTimingGrain
 {
     public async Task RecordTraversal(TimeSpan duration)
     {
+        logger.LogDebug("Recording traversal for segment {Segment} taking {Duration}", this.GetPrimaryKeyString(), duration);
         state.State = tracker.RecordTraversal(state.State, duration);
         await state.WriteStateAsync();
     }
